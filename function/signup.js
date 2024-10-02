@@ -10,19 +10,9 @@ const signupForm = document.getElementById("signup-form");
 const validInputs = document.querySelectorAll("[data-valid]");
 const btnAbled = document.getElementById("signup-button");
 
+//이메일 값 확인
 inputEmail.addEventListener("focusout", (e) => validateEmail(e, "email"));
 
-inputPassword.addEventListener("focusout", (e) =>
-  validatePassword(e, "password")
-);
-
-inputNickname.addEventListener("focusout", (e) => validateNickname(e, "text"));
-
-checkoutPassword.addEventListener("focusout", (e) =>
-  doubleCheckPassword(e, "password")
-);
-
-//이메일 값 확인
 function validateEmail(e, type) {
   const inputValue = e.target.value;
   const parentElement = e.target.parentElement;
@@ -47,6 +37,8 @@ function validateEmail(e, type) {
 }
 
 //닉네임 값 확인
+inputNickname.addEventListener("focusout", (e) => validateNickname(e, "text"));
+
 function validateNickname(e, type) {
   const inputValue = e.target.value;
   const parentElement = e.target.parentElement;
@@ -65,6 +57,10 @@ function validateNickname(e, type) {
 }
 
 //비밀번호값 확인
+inputPassword.addEventListener("focusout", (e) =>
+  validatePassword(e, "password")
+);
+
 function validatePassword(e, type) {
   const inputValue = e.target.value;
   const parentElement = e.target.parentElement;
@@ -88,6 +84,10 @@ function validatePassword(e, type) {
 }
 
 //비밀번호 일치 확인
+checkoutPassword.addEventListener("focusout", (e) =>
+  doubleCheckPassword(e, "password")
+);
+
 function doubleCheckPassword(e, type) {
   const inputValue = e.target.value;
   const parentElement = e.target.parentElement;

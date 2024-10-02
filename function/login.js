@@ -8,13 +8,9 @@ const loginForm = document.getElementById("login-form");
 const validInputs = document.querySelectorAll("[data-valid]");
 const btnAbled = document.getElementById("login-button");
 
+//이메일 값 확인
 inputEmail.addEventListener("focusout", (e) => validateEmail(e, "email"));
 
-inputPassword.addEventListener("focusout", (e) =>
-  validatePassword(e, "password")
-);
-
-//이메일 값 확인
 function validateEmail(e, type) {
   const inputValue = e.target.value;
   const parentElement = e.target.parentElement;
@@ -39,6 +35,10 @@ function validateEmail(e, type) {
 }
 
 // 비밀번호 값 확인
+inputPassword.addEventListener("focusout", (e) =>
+  validatePassword(e, "password")
+);
+
 function validatePassword(e, type) {
   const inputValue = e.target.value.trim();
   const parentElement = e.target.parentElement;
