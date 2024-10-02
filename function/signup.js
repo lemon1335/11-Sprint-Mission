@@ -10,25 +10,24 @@ const signupForm = document.getElementById("signup-form");
 const validInputs = document.querySelectorAll("[data-valid]");
 const btnAbled = document.getElementById("signup-button");
 
-inputEmail.addEventListener("focusout", (e) => printEventType(e, "email"));
+inputEmail.addEventListener("focusout", (e) => validateEmail(e, "email"));
 
 inputPassword.addEventListener("focusout", (e) =>
-  printEventType(e, "password")
+  validatePassword(e, "password")
 );
 
-inputNickname.addEventListener("focusout", (e) => printEventType(e, "text"));
+inputNickname.addEventListener("focusout", (e) => validateNickname(e, "text"));
 
 checkoutPassword.addEventListener("focusout", (e) =>
-  printEventType(e, "password")
+  doubleCheckPassword(e, "password")
 );
 
-function printEventType(e, type) {
-  //변수 선언
+//이메일 값 확인
+function validateEmail(e, type) {
   const inputValue = e.target.value;
   const parentElement = e.target.parentElement;
   const validationMessage = parentElement.querySelector(".invalid-text");
 
-  //이메일 값 확인
   if (type === "email") {
     if (inputValue === "") {
       validationMessage.textContent = "이메일을 입력해주세요.";
@@ -45,8 +44,13 @@ function printEventType(e, type) {
     validationMessage.textContent = "";
     inputEmail.classList.remove("invalid-mark");
   }
+}
 
-  //닉네임 값 확인
+//닉네임 값 확인
+function validateNickname(e, type) {
+  const inputValue = e.target.value;
+  const parentElement = e.target.parentElement;
+  const validationMessage = parentElement.querySelector(".invalid-text");
   if (type === "text") {
     if (inputValue === "") {
       validationMessage.textContent = "닉네임을 입력해주세요";
@@ -58,8 +62,13 @@ function printEventType(e, type) {
     validationMessage.textContent = "";
     inputNickname.classList.remove("invalid-mark");
   }
+}
 
-  //비밀번호값 확인
+//비밀번호값 확인
+function validatePassword(e, type) {
+  const inputValue = e.target.value;
+  const parentElement = e.target.parentElement;
+  const validationMessage = parentElement.querySelector(".invalid-text");
   if (type === "password") {
     if (inputValue === "") {
       validationMessage.textContent = "비밀번호를 입력해주세요.";
@@ -76,8 +85,13 @@ function printEventType(e, type) {
     validationMessage.textContent = "";
     inputPassword.classList.remove("invalid-mark");
   }
+}
 
-  //비밀번호 일치 확인
+//비밀번호 일치 확인
+function doubleCheckPassword(e, type) {
+  const inputValue = e.target.value;
+  const parentElement = e.target.parentElement;
+  const validationMessage = parentElement.querySelector(".invalid-text");
   if (type === "password") {
     if (inputValue !== inputPassword.value) {
       validationMessage.textContent = "비밀번호가 일치하지 않습니다..";
@@ -89,24 +103,19 @@ function printEventType(e, type) {
     validationMessage.textContent = "";
     checkoutPassword.classList.remove("invalid-mark");
   }
+}
 
-  //버튼 활성화
-  signupForm.addEventListener("focusout", (e) => updateButtonState(e));
+//버튼 활성화
+signupForm.addEventListener("focusout", (e) => updateButtonState(e));
 
-  function updateButtonState(e) {
-    const result = Array.from(validInputs).every(
-      (e) => e.dataset.valid === "true"
-    );
-    console.log(result + "completed");
+function updateButtonState(e) {
+  const result = Array.from(validInputs).every(
+    (e) => e.dataset.valid === "true"
+  );
+  console.log(result + "completed");
 
-    if (result) {
-      btnAbled.disabled = false;
-    }
-    btnAbled.classList.toggle("active", result);
+  if (result) {
+    btnAbled.disabled = false;
   }
-
-  e.target.dataset.valid = true;
-  console.log(regex.test(inputValue));
-  console.log(validationMessage);
-  console.log(e, type);
+  btnAbled.classList.toggle("active", result);
 }
